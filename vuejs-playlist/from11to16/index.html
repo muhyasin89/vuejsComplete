@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>From 11 to 20</title>
+      <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="vue-app">
+      <h1>Conditionals</h1>
+      <p>error: {{error}}</p>
+      <p>success: {{success}}</p>
+      <button v-on:click="error=!error"> Toggle Error </button>
+      <button v-on:click="success=!success">Toggle Success</button>
+
+      <!-- <p v-if="error">There is an error</p>
+      <p v-if="success">There is an success</p> -->
+      <!-- the difference if it toogle v-if will remove the element
+        but the show only add display:none -->
+
+      <p v-show="error">There is an error</p>
+      <p v-show="success">There is an success</p>
+
+      <h1>Looping through the list</h1>
+      <ul>
+          <li v-for="character in characters"> {{character}} </li>
+      </ul>
+      <ul>
+        <!-- <li v-for="ninja in ninjas">name: {{ninja.name}}, age: {{ninja.age}}</li> -->
+        <li v-for="(ninja, index) in ninjas">{{index}} .name: {{ninja.name}}, age: {{ninja.age}}</li>
+      </ul>
+
+      <!-- bag image -->
+      <div id="bag" v-bind:class="{ burst: ended }"></div>
+      <!-- bag health -->
+      <div id="bag-health">
+        <div v-bind:style="{width: health + '%'}"></div>
+      </div>
+      <!-- game control -->
+      <div id="controls">
+        <button v-on:click="punch" v-show="!ended">Punched</button>
+        <button v-on:click="restart">Restart</button>
+      </div>
+    </div>
+    <div id="vue-app-one">
+      <h2>{{ title }}</h2>
+      <p>{{ greet }}</p>
+      <greeting></greeting>
+      <input type="text" ref="hello" />
+      <button v-on:click="readRefs">Submit</button>
+    </div>
+    <div id="vue-app-two">
+      <h2>{{ title }}</h2>
+      <p>{{ greet }}</p>
+      <input type="text" ref="test" />
+      <button v-on:click="readRefs">Submit</button>
+      <greeting></greeting>
+      <button v-on:click="changeTitle">Change App one title</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
