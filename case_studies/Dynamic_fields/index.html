@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+            .fileContainer {
+                overflow: hidden;
+                position: relative;
+            }
+                    
+            .fileContainer [type=file] {
+                cursor: inherit;
+                display: block;
+                font-size: 999px;
+                filter: alpha(opacity=0);
+                min-height: 21px;
+                min-width: 100%;
+                opacity: 0;
+                position: absolute;
+                right: 0;
+                text-align: right;
+                top: 0;
+            }
+                
+            .fileContainer {
+                background: #E3E3E3;
+                float: left;
+                padding: .5em;
+                height: 21px;
+            }
+                
+            .fileContainer [type=file] {
+                cursor: pointer;
+            }
+            </style>
+</head>
+<body>
+        <div id="app">
+            <form class="rows">
+                <div class="rows">  {{ rows }}</div>
+            
+                <div v-for="(row, index) in rows">
+                    <div class="form-group" v-if="visible_field[index].image_link_seen">
+                        <label for="title">Title</label>
+                        <input type="text" v-model="row.title" id="title" class="form-control" aria-describedby="emailHelp" placeholder="Enter title">
+                    </div>
+                    <div class="form-group" v-if="visible_field[index].video_link_seen">
+                        <label for="description">Description</label>
+                        <input type="password"  placeholder="Password">
+                        <input type="text" class="form-control" id="description" v-model="row.description" >
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label" for="exampleCheck1">Upload Image</label>
+                        <select class="form-control" v-model="row.selected" @change="changeLocation(index, row.selected)" :id="index">
+                            <option v-for="option in options" v-bind:value="option.id" >{{ option.name }}</option>
+                        </select>
+                    </div>
+                    <div class="form-check" v-if="visible_field[index].file_seen">
+                        <label class="fileContainer" >
+                            {{row.file.name}} 
+                            <input type="file" @change="setFilename($event, row)" :id="index" />
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <button v-on:click="removeElement(index);" style="cursor: pointer">Remove</button>
+                    </div>
+                </div>
+                <div class="form-check">
+                    <button class="button btn-primary" @click="addRow">Add row</button>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>     
+        </div>
+        
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+         new Vue({
+            el: "#app",
+            data: {
+                rows: [],
+                visible_field: [],
+                options: [
+                    {id: 1, name: "image link"},
+                    {id: 2, name: "video link"},
+                    {id: 3, name: "image"}
+                ]
+            },
+            methods: {
+                addRow: function() {
+                    var elem = document.createElement('tr');
+                    this.rows.push({
+                        image_link: "",
+                        video_link: "",
+                        selected: "",
+                        file: {
+                            name: 'Choose File'
+                        }
+                    });
+                    
+                    this.visible_field.push({
+                    	image_link_seen: true,
+                        video_link_seen: true,
+                        file_seen: true
+                    });
+                },
+                removeElement: function(index) {
+                    this.rows.splice(index, 1);
+                    this.visible_field.splice(index, 1);
+                },
+                setFilename: function(event, row) {
+                    var file = event.target.files[0];
+                    row.file = file
+                },
+                changeLocation: function(index, selected){
+                		console.log(selected);
+                    console.log(index);
+                    if(selected === this.options[0].id){
+                    	this.visible_field[index].video_link_seen = false
+                  
+                      this.visible_field[index].file_seen = false
+                    }else if(selected === this.options[1].id){
+          
+                      this.visible_field[index].image_link_seen = false
+                      this.visible_field[index].file_seen = false
+                    }else if(selected === this.options[2].id){
+                    	this.visible_field[index].video_link_seen = false
+                      this.visible_field[index].image_link_seen = false
+           
+                    }else{
+                    	this.visible_field[index].video_link_seen = true
+                      this.visible_field[index].image_link_seen = true
+                      this.visible_field[index].file_seen = true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
