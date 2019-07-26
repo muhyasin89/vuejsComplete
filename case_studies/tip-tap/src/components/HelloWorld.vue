@@ -5,7 +5,8 @@
     <h3>Text Editor</h3>
     <text-editor></text-editor>
     <h3>Text  Basic</h3>
-    <text-basic></text-basic>
+    <p>{{ parentData }}</p>
+    <text-basic :inputData.sync="parentData" :onUpdate="changeData" @keyup="welcomeData"></text-basic>
     <h3>Hidding Menu</h3>
     <text-menu-hidding></text-menu-hidding>
   </div>
@@ -20,7 +21,21 @@ import HidingMenu from '@/components/TipTapHidingMenu'
 export default {
   name: 'HelloWorld',
   props: {
-    msg: String
+    msg: String,
+    inputData: String
+  },
+  data(){
+    return {
+      parentData: "Jithil"
+    }
+  },
+  methods: {
+    changeData(){
+      console.log('wew', parentData)
+    },
+    welcomeData(){
+      console.log('welcome data')
+    }
   },
   components: {
     'text-input': RichTextEditor,

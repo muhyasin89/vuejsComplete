@@ -131,9 +131,16 @@
       </div>
     </editor-menu-bar>
 
-    <editor-content class="editor__content" :editor="editor" />
+    <editor-content class="editor__content" :editor="editor" v-model="inputData" @keyup="$emit('update:inputData', inputData);"/>
   </div>
 </template>
+
+<style>
+.editor__content{
+  border-style: solid;
+  border-width: 2px
+}
+</style>
 
 <script>
 import Icon from '@/components/Icon'
@@ -163,6 +170,14 @@ export default {
     EditorContent,
     EditorMenuBar,
     Icon,
+  },
+  props: {
+      inputData: String
+  },
+  methods: {
+    changeData(){
+      console.log('welcome', this.inputData)
+    }
   },
   data() {
     return {
@@ -209,6 +224,17 @@ export default {
           </blockquote>
         `,
       }),
+    }
+  },
+  watch: {
+    inputData: function(val){
+      console.log('this is val',val)
+    },
+    content: function(val){
+      console.log('this is content', val)
+    },
+    editor: function(val){
+      console.log('editor', val)
     }
   },
   beforeDestroy() {
