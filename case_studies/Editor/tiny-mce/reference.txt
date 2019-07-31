@@ -1,0 +1,2 @@
+https://github.com/mbouclas/tinymce-vue-2?ref=madewithvuejs.com
+https://madewithvuejs.com/tinymce
