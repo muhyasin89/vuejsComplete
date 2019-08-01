@@ -1,0 +1,6 @@
+article:
+https://scotch.io/tutorials/vue-authentication-and-route-handling-using-vue-router
+
+
+github:
+https://github.com/christiannwamba/vue-auth-handling

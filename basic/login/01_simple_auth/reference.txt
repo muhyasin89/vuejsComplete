@@ -1,0 +1,4 @@
+https://blog.kaliop.com/en/blog/2018/09/17/simple-authentication-components-strategy-with-vuejs/
+
+github
+https://github.com/Erilan/auth-components-strategy-vuejs

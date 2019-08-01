@@ -40,7 +40,7 @@
           :class="{ 'is-active': isActive.code() }"
           @click="commands.code"
         >
-          <icon name="code" />
+          <span class="glyphicon glyphicon-barcode"></span>
         </button>
 
         <button
@@ -48,7 +48,7 @@
           :class="{ 'is-active': isActive.paragraph() }"
           @click="commands.paragraph"
         >
-          <icon name="paragraph" />
+          <span class="glyphicon glyphicon-list-alt"></span>
         </button>
 
         <button
