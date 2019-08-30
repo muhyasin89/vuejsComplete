@@ -33,8 +33,6 @@ export default {
   methods: {
       updateValue(value){
           console.log('this is value', value)
-          console.log('change startDate', moment(value['startDate']).format('YYYY-MM-DD'))
-          console.log('change endDate', moment(value['endDate']).format('YYYY-MM-DD'))
       }
   },
   components: { DateRangePicker },

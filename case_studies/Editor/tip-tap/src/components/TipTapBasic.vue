@@ -131,7 +131,7 @@
       </div>
     </editor-menu-bar>
 
-    <editor-content class="editor__content" :editor="editor" v-model="inputData" @keyup="$emit('update:inputData', inputData);"/>
+    <editor-content class="editor__content" :editor="editor" :onUpdate="changeInput" @keyup="$emit('update:inputData', inputData);"/>
   </div>
 </template>
 
@@ -177,6 +177,9 @@ export default {
   methods: {
     changeData(){
       console.log('welcome', this.inputData)
+    },
+    changeInput(){
+      console.log('change input')
     }
   },
   data() {
